@@ -9,14 +9,21 @@ def main():
     Mem = MainMemory()
     while (True):
         instr = input().split()
-        if (instr[0] == 'r'):
+        if (instr[0] == 'Request'):
             var_name = instr[1]
             for key in proccess_vriables.keys():
                 if var_name in proccess_vriables[key].keys():
                     variable_found = True
-                    print(Mem.logical(proccess_vriables[key], var_name))
-                    Mem.physical(
-                        proccess_vriables, key, var_name, proccess_vriables[key][var_name])
+
+                    logical_address = Mem.logical(
+                        proccess_vriables[key], var_name)
+                    print(
+                        f'Logical: Page {logical_address[0]} - Offset {logical_address[1]}')
+
+                    physical_Address = Mem.physical(
+                        proccess_vriables[key], var_name, key)
+                    print(
+                        f'Physical: Frame {physical_Address[0]} - Offset {physical_Address[1]}')
 
             if variable_found == False:
                 print("Variable Could Not Be Found!")

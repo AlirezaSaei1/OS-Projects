@@ -1,10 +1,9 @@
 class MainMemory():
     def __init__(self) -> None:
-        self.frames = ['D0', 'B1', 'B0', 'D2', 'D1', '-', '-', '-', '-', '-']
+        self.frames = ['D.0', 'B.1', 'B.0',
+                       'D.2', 'D.1', '-', '-', '-', '-', '-']
 
     def logical(self, proc_vars, var_name):
-        print(proc_vars)
-        print(var_name)
         page = 1
         offset = 0
         available_space = 0
@@ -18,7 +17,7 @@ class MainMemory():
                 offset = 0
 
             if var == var_name:
-                return f'Logical: Page {page} - Offset {offset}'
+                return (page, offset)
 
             offset += proc_vars[var]
             if offset == 400:
@@ -26,5 +25,6 @@ class MainMemory():
                 page += 1
                 available_space = 0
 
-    def physical(self, process, proc_ame, var_name, space):
-        pass
+    def physical(self, proc_vars, var_name, proc_name):
+        logical = self.logical(proc_vars, var_name)
+        return (self.frames.index(f'{proc_name}.{logical[0]-1}'), logical[1])
