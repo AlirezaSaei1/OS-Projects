@@ -1,19 +1,19 @@
-from multiprocessing import Process, Value, Array, Queue, Lock
+from multiprocessing import Process, Value, Array, Queue, Semaphore
 from Functions import *
 from time import sleep
 
 if __name__ == '__main__':
     num = Value('d', 0.0)
     arr = Array('i', range(2))
-    lock = Lock()
+    sem = Semaphore(1)
 
     q = Queue()
-    p1 = Process(target=add, args=(lock, num, 10))
-    p2 = Process(target=sub, args=(lock, num, 5))
-    p3 = Process(target=mul, args=(lock, num, 2))
-    p4 = Process(target=div, args=(lock, num, 4))
+    p1 = Process(target=add, args=(sem, num, 10))
+    p2 = Process(target=sub, args=(sem, num, 5))
+    p3 = Process(target=mul, args=(sem, num, 2))
+    p4 = Process(target=div, args=(sem, num, 4))
 
-    show = Process(target=show, args=(lock, num,))
+    show = Process(target=show, args=(sem, num,))
     sleep(1)
 
     p1.start()
