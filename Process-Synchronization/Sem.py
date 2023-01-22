@@ -9,16 +9,14 @@ class Semaphore:
      def semWait(self, i):
          self.val.value -= 1
          if self.val.value < 0:
-             self.arr[i] = 0
              self.queue.put(i)
-
-             while True:
-                 if self.arr[i] == 1:
-                     break
+             self.arr[i] = 0
+             while self.arr[i] != 1:
+                 pass
 
      def semSignal(self, i):
          self.val.value += 1
          if self.val.value <= 0:
-             j = self.queue.get()
-             self.arr[j] = 1
+             temp = self.queue.get()
+             self.arr[temp] = 1
          self.arr[i] = 0
