@@ -1,12 +1,25 @@
 Process B
-def var1 4
-def var2 8
+def var1 40
+def var2 80
 def var3 240
-def var4 148
-def var5 300
+def var4 400
+def var5 40
+def var16 40
+def var17 80
+def var18 240
+def var19 380
+def var20 12
+def var21 40
 Process D
-def var6 120
-def var7 240
+def var6 380
+def var7 320
 def var8 40
 def var9 400
-def var10 380
+def var10 390
+def var22 50
+Process A
+def var11 120
+def var12 240
+def var13 50
+def var14 250
+def var15 110
