@@ -1,11 +1,11 @@
-from multiprocessing import Process, Value, Array, Queue, Semaphore
+from multiprocessing import Process, Value, Array, Queue
 from Functions import *
 from time import sleep
-
+from Sem import Semaphore
 if __name__ == '__main__':
     num = Value('d', 0.0)
     arr = Array('i', range(2))
-    sem = Semaphore(1)
+    sem = Semaphore(4)
 
     q = Queue()
     p1 = Process(target=add, args=(sem, num, 10))
